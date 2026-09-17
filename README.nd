@@ -22,7 +22,6 @@ Upload your PDF research papers and ask questions - get accurate answers with ci
 - **Deployment:** Vercel
 
 ### Project Structure
-
 Researech_Paper_Assistant_RAG/
 ├── main.py              # FastAPI app + RAG logic
 ├── requirements.txt     # Python dependencies
@@ -32,35 +31,6 @@ Researech_Paper_Assistant_RAG/
 │   └── style.css
 └── templates/
     └── index.html       # Frontend UI
-
-
-
-### Installation & Run Locally
-```bash
-# Clone repo
-git clone https://github.com/MaryamArif85/Research-Paper-Assistant-RAG
-cd Research-Paper-Assistant-RAG
-
-# Create venv
-python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Mac/Linux
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create .env file
-echo GEMINI_API_KEY=your_api_key_here > .env
-
-# Run
-uvicorn main:app --reload
-Open: localhost:8000
-
-Create .env file:
-
-GEMINI_API_KEY=your_google_gemini_api_key
-
-Get key from: aistudio.google.com
 
 ### How It Works
 1. User uploads PDFs -> Saved to `/tmp/uploads` (Vercel compatible)
@@ -75,12 +45,14 @@ Get key from: aistudio.google.com
 - `TemplateResponse` with `request` parameter to avoid auto-wrapping bug
 - Lightweight dependencies to stay under 500MB limit
 - Handles `FUNCTION_INVOCATION_FAILED` by proper error handling
-
 ### API Endpoints
 - `GET /` - Home page
 - `POST /upload` - Upload PDFs
 - `POST /ask` - Ask question to your papers
 
 ### Author
-Maryam Ba11 - Final Year Project
+Maryam Arif
 Built with ❤️ for research assistance
+
+### License
+MIT
