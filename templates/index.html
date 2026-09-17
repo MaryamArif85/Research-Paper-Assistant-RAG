@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Notebook - RAG</title>
+    <link rel="stylesheet" href="/static/style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="desk">
+  <div class="notebook">
+    <div class="spiral"></div>
+    <div class="notebook-header">
+      <h1>📓 Research Notebook</h1>
+      <p>Upload papers • Ask questions • Get answers with page refs</p>
+      <span class="badge">{{ docs_uploaded }} docs in memory</span>
+    </div>
+
+    {% if error %}<div class="alert error">❌ {{ error }}</div>{% endif %}
+    {% if message %}<div class="alert success">✅ {{ message }}</div>{% endif %}
+
+    <div class="page-section">
+      <h2>1. Drop your papers here</h2>
+      <form action="/upload" method="post" enctype="multipart/form-data" class="card">
+        <input type="file" name="files" multiple accept=".pdf" id="file-input">
+        <label for="file-input" class="file-btn">📎 Choose PDFs</label>
+        <span id="file-name">No file chosen</span>
+        <button type="submit" class="main-btn">Upload to Notebook</button>
+      </form>
+    </div>
+
+    <div class="page-section">
+      <h2>2. Ask your research question</h2>
+      <form action="/ask" method="post" class="card">
+        <textarea name="question" placeholder="e.g. What is the methodology used in paper 2?" required>{{ question or '' }}</textarea>
+        <button type="submit" class="main-btn">🔍 Search Notes</button>
+      </form>
+    </div>
+
+    {% if answer %}
+    <div class="page-section answer-area">
+      <h2>Answer:</h2>
+      <div class="paper">
+        {{ answer }}
+      </div>
+      {% if sources %}
+      <h3>Sources:</h3>
+      <div class="sources">
+        {% for s in sources %}
+        <div class="source-card"><b>{{ s.doc_name }}</b> - Page {{ s.page_no }}<br><i>{{ s.text[:180] }}...</i></div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+<script>
+document.getElementById('file-input')?.addEventListener('change', e=>{
+  document.getElementById('file-name').innerText = e.target.files.length + ' files selected';
+});
+</script>
+</body>
+</html>
