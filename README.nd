@@ -1,27 +1,27 @@
-#Research Paper Assistant - RAG
+# Research Paper Assistant - RAG
 
 An AI-powered assistant to chat with your research papers using Retrieval-Augmented Generation (RAG).
 
 Upload your PDF research papers and ask questions - get accurate answers with citations from your documents.
 
-###Live Demo
+### Live Demo
 **https://researech-paper-assistant-rag.vercel.app**
 
-###Features
+### Features
 - 📄 Upload multiple research papers (PDF)
 - 💬 Chat with your papers using AI
 - 🔍 RAG-based accurate answers with source references `[Source: paper.pdf | Page 2]`
 - ⚡ FastAPI backend + modern UI
 - ☁️ Deployed on Vercel
 
-###Tech Stack
+### Tech Stack
 - **Backend:** FastAPI, Python
 - **AI / RAG:** LangChain, Google Gemini API, FAISS Vector Store
 - **PDF Processing:** PyPDF2 / pdfplumber
 - **Frontend:** HTML, CSS, JavaScript (Jinja2 Templates)
 - **Deployment:** Vercel
 
-###Project Structure
+### Project Structure
 Researech_Paper_Assistant_RAG/
 ├── main.py              # FastAPI app + RAG logic
 ├── requirements.txt     # Python dependencies
@@ -32,7 +32,7 @@ Researech_Paper_Assistant_RAG/
 └── templates/
     └── index.html       # Frontend UI
 
-###How It Works
+### How It Works
 1. User uploads PDFs -> Saved to `/tmp/uploads` (Vercel compatible)
 2. Text extracted with page numbers
 3. Text chunked (1000 chars) and embedded via Gemini Embeddings
@@ -40,19 +40,19 @@ Researech_Paper_Assistant_RAG/
 5. User asks question -> Similarity search retrieves relevant chunks
 6. Chunks + Question -> Gemini LLM generates answer with citations
 
-###Deployment Fixes (Important for Vercel)
+### Deployment Fixes (Important for Vercel)
 - Uses `/tmp` directory for uploads (Vercel serverless is read-only)
 - `TemplateResponse` with `request` parameter to avoid auto-wrapping bug
 - Lightweight dependencies to stay under 500MB limit
 - Handles `FUNCTION_INVOCATION_FAILED` by proper error handling
-###API Endpoints
+### API Endpoints
 - `GET /` - Home page
 - `POST /upload` - Upload PDFs
 - `POST /ask` - Ask question to your papers
 
-###Author
+### Author
 Maryam Arif
 Built with ❤️ for research assistance
 
-###License
+### License
 MIT
